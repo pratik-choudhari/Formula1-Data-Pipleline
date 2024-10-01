@@ -22,5 +22,17 @@ An end-to-end formula 1 data pipeline built with Azure Databricks, Azure Data Fa
 
 ## Data Factory Pipelines
 
-**Ingestion Pipeline**
+### Ingestion Pipeline
+
+<img width="100%" align="center" src="images/ingestion_pipeline_flow.png"/>
+
+**If Condition - True**
+
+<img width="100%" align="center" src="images/ingestion_pipeline_if_true.png"/>
+
+**If Condition - False**
+
+<img width="100%" align="center" src="images/ingestion_pipeline_if_false.png"/>
+
+<img width="100%" align="center" src="images/email_logic_app.png"/>
 
