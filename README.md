@@ -7,8 +7,11 @@ An end-to-end formula1 data pipeline built with Azure Databricks, Azure Data Fac
 
 ## Architecture
 
-<img width="50%" align="right" src="images/formula1-pipeline-architecture.svg"/>
+<p align="center">
+   <img src="images/formula1-pipeline-architecture.png"/>
+</p>
 
+### Data flow:
 1. Ingestion
    - For every F1 race, a new folder is generated in the raw data layer, containing 8 files specific to that race on a given date.
    - Azure Data Factory periodically monitors for the arrival of new data and, once detected, triggers a notebook pipeline. The raw data is then moved to the processed layer in the Delta Lake.
