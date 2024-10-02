@@ -29,13 +29,23 @@ An end-to-end formula1 data pipeline built with Azure Databricks, Azure Data Fac
 
 <img width="100%" align="center" src="images/ingestion_pipeline_flow.png"/>
 
-**If Condition - True**
+#### Activities:
 
-<img width="100%" align="center" src="images/ingestion_pipeline_if_true.png"/>
+1. Get Metadata
+   - Accesses blob storage via linked service to check if a folder for current run exists in raw container.
+   - Output consists of an Exists flag.
+2. If Condition
+   - Takes the output from Get metadata activity.
+   - If output.exists flag is true then execute the following pipeline
+     <img width="100%" align="center" src="images/ingestion_pipeline_if_true.png"/>
+   - Else trigger a logic app which send a failure email to a specific email id.<br>
+      <div style="display: flex; flex-direction: row; justify-content: space-evenly">
+         <img height=200 src="images/ingestion_pipeline_if_false.png"/>
+         <img height=200 src="images/email_logic_app.png"/>
+      </div>
+   - Error email<br>
+      <img height=200 align="center" src="images/pipeline_failure_email.png"/>
 
-**If Condition - False**
+### Transformation Pipeline
 
-<img width="60%" align="left" src="images/ingestion_pipeline_if_false.png"/>
-
-<img width="30%" align="right" src="images/email_logic_app.png"/>
-
+TBD
