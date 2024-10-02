@@ -2,7 +2,7 @@
 An end-to-end formula1 data pipeline built with Azure Databricks, Azure Data Factory, and Apache Spark.
 
 <p align="center">
-    <img height=300 src="images/f1_high_res.jpg"/>
+    <img height=300 src="images/f1_car.jpg"/>
 </p>
 
 ## Architecture
