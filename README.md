@@ -60,19 +60,22 @@ Debugging the pipeline:
 #### Activities:
 
 1. Get Metadata
-   - Accesses blob storage via linked service to check if a folder for current run exists in raw container.
-   - Output consists of an Exists flag.
+   - Connects to blob storage using a linked service to verify whether a folder for the current run exists in the raw container.
+   - The output includes an `Exists` flag.
+
 2. If Condition
-   - Takes the output from Get metadata activity.
-   - If output.exists flag is true then execute the following pipeline. All files available [here.](./ingestion)
+   - Uses the output from the Get Metadata activity.
+   - If the `output.exists` flag is true, the following pipeline is executed. All files are available [here](./ingestion).  
      <img width="100%" align="center" src="images/ingestion_pipeline_if_true.png"/>
-   - Else trigger a logic app which send a failure email to a specific email id.<br>
-      <div style="display: flex; flex-direction: row; justify-content: space-evenly">
-         <img height=200 src="images/ingestion_pipeline_if_false.png"/>
-         <img height=200 src="images/email_logic_app.png"/>
-      </div>
-   - Error email<br>
-      <img height=200 align="center" src="images/pipeline_failure_email.png"/>
+
+   - If the flag is false, a Logic App is triggered to send a failure email to a specific email address.  
+     <div style="display: flex; flex-direction: row; justify-content: space-evenly">
+        <img height=200 src="images/ingestion_pipeline_if_false.png"/>
+        <img height=200 src="images/email_logic_app.png"/>
+     </div>
+
+   - Error Email
+     <img height=200 align="center" src="images/pipeline_failure_email.png"/>
 
 ### Transformation Pipeline
 
