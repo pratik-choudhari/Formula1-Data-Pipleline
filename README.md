@@ -8,10 +8,11 @@ An end-to-end formula1 data pipeline built with Azure Databricks, Azure Data Fac
 ## Table of Contents
 
 1. [Architecture](#architecture)
-2. [Storage and Files](#storage-and-files)
-3. [Pipelines](#data-factory-pipelines)
-4. [Trigger](#trigger)
-5. [Sample Trigger Execution](#triggered-execution-video)
+2. [Data Flow](#data-flow)
+3. [Storage and Files](#storage-and-files)
+4. [Pipelines](#data-factory-pipelines)
+5. [Trigger](#trigger)
+6. [Sample Trigger Execution](#triggered-execution-video)
 
 ## Architecture
 
@@ -19,16 +20,19 @@ An end-to-end formula1 data pipeline built with Azure Databricks, Azure Data Fac
    <img src="images/formula1-pipeline-architecture.png"/>
 </p>
 
-### Data flow:
+## Data Flow
+
 1. Ingestion
-   - For every F1 race, a new folder is generated in the raw data layer, containing 8 files specific to that race on a given date.
-   - Azure Data Factory periodically monitors for the arrival of new data and, once detected, triggers a notebook pipeline. The raw data is then moved to the processed layer in the Delta Lake.
+   - For each F1 race, a new folder is created in the raw data layer, containing race-specific files and folders.
+   - An ADF trigger schedules and executes a notebook pipeline, moving the raw data to the processed layer in Delta Lake.
+
 2. Transformation
-   - Once the raw data is processed, a transformation pipeline is activated.
+   - After the raw data is processed, a transformation pipeline is initiated.
    - The transformation notebooks join, filter, and store the processed data in the presentation layer of the Delta Lake.
+
 3. Analysis
-   - Data can be queried using SparkSQL or the DataFrame API for flexible data exploration.
-   - Visualization tools such as Power BI can connect to the Delta Lake to create dashboards and reports.
+   - Data can be queried using SparkSQL or the DataFrame API, enabling flexible data exploration.
+   - Visualization tools like Power BI can connect to the Delta Lake to generate dashboards and reports.
 <br>
 
 ## Storage and Files
