@@ -33,6 +33,10 @@ An end-to-end formula1 data pipeline built with Azure Databricks, Azure Data Fac
 
 <img width="100%" align="center" src="images/ingestion_pipeline_flow.png"/>
 
+Debugging the pipeline:
+
+<img width="100%" align="center" src="images/ingestion_pipeline_debug_ss.png"/>
+
 #### Activities:
 
 1. Get Metadata
@@ -63,3 +67,21 @@ An end-to-end formula1 data pipeline built with Azure Databricks, Azure Data Fac
 2. Databricks Notebook
    - Execute the [driver_standings](./transform/driver_standings.py) databricks notebook to generate driver_standings delta table in presentation layer.
    - Data is pulled from race_results table to generate driver standings, hence this activity must run only after successful execution of race results transformation.
+
+## Trigger
+
+<img width="100%" align="center" src="images/trigger.png"/>
+
+A tumbling windows trigger with 168hrs/2w interval, end date specified and max concurrency set to 1.
+
+Parameter configuration:
+```json
+{
+  "p_window_end_date": "@trigger().outputs.windowEndTime"
+}
+```
+
+
+## Triggered Execution (Video)
+
+[![ADF trigger](https://img.youtube.com/vi/f-cbAJRQi1E/0.jpg)](https://www.youtube.com/watch?v=f-cbAJRQi1E)
