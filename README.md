@@ -5,6 +5,13 @@ An end-to-end formula1 data pipeline built with Azure Databricks, Azure Data Fac
     <img height=300 src="images/f1_car.jpg"/>
 </p>
 
+## Table of Contents
+
+1. [Architecture](#architecture)
+2. [Pipelines](#data-factory-pipelines)
+3. [Trigger](#trigger)
+4. [Sample Trigger Execution](#triggered-execution-video)
+
 ## Architecture
 
 <p align="center">
