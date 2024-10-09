@@ -25,6 +25,10 @@ An end-to-end formula1 data pipeline built with Azure Databricks, Azure Data Fac
 
 ## Data Factory Pipelines
 
+### Main Pipeline
+
+<img width="100%" align="center" src="images/f1_pipeline.png"/>
+
 ### Ingestion Pipeline
 
 <img width="100%" align="center" src="images/ingestion_pipeline_flow.png"/>
@@ -36,7 +40,7 @@ An end-to-end formula1 data pipeline built with Azure Databricks, Azure Data Fac
    - Output consists of an Exists flag.
 2. If Condition
    - Takes the output from Get metadata activity.
-   - If output.exists flag is true then execute the following pipeline
+   - If output.exists flag is true then execute the following pipeline. All files available [here.](./ingestion)
      <img width="100%" align="center" src="images/ingestion_pipeline_if_true.png"/>
    - Else trigger a logic app which send a failure email to a specific email id.<br>
       <div style="display: flex; flex-direction: row; justify-content: space-evenly">
@@ -48,4 +52,14 @@ An end-to-end formula1 data pipeline built with Azure Databricks, Azure Data Fac
 
 ### Transformation Pipeline
 
-TBD
+<img width="100%" align="center" src="images/transformation_pipeline_flow.png"/>
+
+#### Activities:
+
+1. Databricks Notebook
+   - Execute the [race_results](./transform/race_results.py) databricks notebook to generate race_results delta table in presentation layer.
+   - This new table is created by joining and filtering data from 4 processed layer tables namely races, circuits, drivers and constrcutors.
+   - Information in this table can be used to show a dashboard of results after each race.
+2. Databricks Notebook
+   - Execute the [driver_standings](./transform/driver_standings.py) databricks notebook to generate driver_standings delta table in presentation layer.
+   - Data is pulled from race_results table to generate driver standings, hence this activity must run only after successful execution of race results transformation.
